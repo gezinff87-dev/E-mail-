@@ -19,7 +19,7 @@ function generateEmail() {
     const domains = ['tempinbox.com', 'quickmail.dev', 'instantinbox.net'];
     const randomId = Math.random().toString(36).substring(2, 10);
     const domain = domains[Math.floor(Math.random() * domains.length)];
-    return `${randomId}@${domain}`;
+    return randomId + '@' + domain;
 }
 
 // Rotas API
@@ -69,13 +69,12 @@ app.get('/api/mailbox/:mailboxId', (req, res) => {
     res.json({ email: mailbox.email, messages: mailbox.messages });
 });
 
-// ROTA PRINCIPAL CORRIGIDA - USA ESSA!
+// Rota principal - CORRIGIDA
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Inicia servidor
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 Servidor rodando na porta ${PORT}`);
-});a ${PORT}`);
+app.listen(PORT, '0.0.0.0', function() {
+    console.log('Servidor rodando na porta ' + PORT);
 });
